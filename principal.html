@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cadastro de Carros</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="node_modules/angular-ui-grid/ui-grid.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+
+    <link rel="stylesheet" href="app/css/style.css">
+    <link rel="stylesheet" href="app/css/template.css">
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="node_modules/angular-ui-grid/ui-grid.js"></script>
+
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/oclazyload/dist/ocLazyLoad.js"></script>
+
+    <script src="app/config/pd-app.js"></script>
+    <script src="app/service/alert-service.js"></script>
+    <script src="app/service/transporte-service.js"></script>
+    <script src="app/filter/maisculo.filter.js"></script>
+    <script src="app/config/pd-rotas.config.js"></script>
+    <script src="app/controller/router.controller.js"></script>
+
+
+</head>
+
+<body ng-app="pdApp" class="container" ng-controller="RouterController">
+
+<div class="container">
+
+    <header class="row">
+        header
+    </header>
+
+    <div class="row">
+
+        <div role="main" class="col-md-9 col-md-push-3">
+
+            <div> <!-- corpo-->
+                <ui-view></ui-view>
+            </div>
+
+        </div>
+
+        <nav class="col-md-3 col-md-pull-9">
+
+            <h2>Exercícios</h2>
+
+            <button type="button"
+                    class="btn btn-default btn-medio"
+                    ng-click="abrirPagina('cadastroCarro')">
+                Ex: 01
+            </button>
+
+        </nav>
+    </div>
+
+    <footer class="row">
+        rodape
+    </footer>
+</div>
+
+</body>
+
+
+</html>

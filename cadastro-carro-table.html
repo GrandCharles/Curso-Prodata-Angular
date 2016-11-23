@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cadastro de Carros - Table</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="node_modules/angular-ui-grid/ui-grid.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+
+    <link rel="stylesheet" href="app/css/style.css">
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+
+    <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="node_modules/angular-ui-grid/ui-grid.js"></script>
+
+    <script src="app/config/pd-app.js"></script>
+    <script src="app/service/alert-service.js"></script>
+    <script src="app/controller/cadastro-carro-table.controller.js"></script>
+    <script src="app/filter/maisculo.filter.js"></script>
+
+</head>
+
+<body ng-app="pdApp" class="container">
+
+<div ng-controller="CadastroCarroController">
+
+    <form name="carroForm" novalidate>
+
+        <div class="panel panel-success">
+
+            <!-- Cabeçalho-->
+            <div class="panel-heading" align="center">
+                Cadastro de Carro - Table
+                {{nome}}
+            </div>
+
+            <!-- Corpo-->
+            <div class="panel-body">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':carroForm.nmCarro.$touched && carroForm.nmCarro.$invalid}">
+
+                            <label class="control-label">Nome do Carro:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idNmCarro"
+                                   name="nmCarro"
+                                   ng-model="entidade.nmCarro"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="30"
+                                   autofocus="true">
+
+                            <div ng-messages="carroForm.nmCarro.$error"
+                                 ng-if="carroForm.nmCarro.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':carroForm.nmCor.$touched && carroForm.nmCor.$invalid}">
+
+                            <label class="control-label">Cor do Carro:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idCor"
+                                   name="nmCor"
+                                   ng-model="entidade.nmCor"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25">
+
+                            <div ng-messages="carroForm.nmCor.$error"
+                                 ng-if="carroForm.nmCor.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <div class="form-group"
+                             ng-class="{'has-error' : carroForm.dtLanc.$touched && carroForm.dtLanc.$invalid}">
+
+                            <label class="control-label">Data de Lançamento:</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="idDtLanc"
+                                   name="dtLanc"
+                                   ng-model="entidade.dtLanc"
+                                   ng-required="true">
+
+                            <div ng-messages="carroForm.dtLanc.$error"
+                                 ng-if="carroForm.dtLanc.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="panel panel-success">
+
+                        <div class="panel-heading" align="center" style="color: mediumblue">
+                            Tabela de Carros
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <table class="table" show-filter="true">
+                                <tr>
+                                    <th>Nome do Carro</th>
+                                    <th>Cor do Carro</th>
+                                    <th>Data de lançamento</th>
+                                </tr>
+
+                                <tr ng-repeat="lstCarro in listaCarros">
+                                    <td ng-bind="lstCarro.nmCarro "></td>
+                                    <td ng-bind="lstCarro.nmCor | maiusculo"></td>
+                                    <td ng-bind="lstCarro.dtLanc | date:'dd/MM/yyyy'"></td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Rodapé-->
+            <div class="panel-footer">
+                <button class="btn btn-primary navbar-btn" ng-click="salvar()">
+                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    Salvar
+                </button>
+
+                <button class="btn btn-primary navbar-btn" ng-click="limpar()">
+                    <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                    Limpar
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

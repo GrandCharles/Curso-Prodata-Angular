@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Router</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="node_modules/angular-ui-grid/ui-grid.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+
+    <link rel="stylesheet" href="app/css/style.css">
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="node_modules/angular-ui-grid/ui-grid.js"></script>
+
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/oclazyload/dist/ocLazyLoad.js"></script>
+
+    <script src="app/config/pd-app.js"></script>
+    <script src="app/config/pd-rotas.config.js"></script>
+    <script src="app/controller/router.controller.js"></script>
+
+</head>
+
+<body ng-app="pdApp" id="index" class="container" ng-controller="RouterController">
+
+
+<header>
+
+    <nav>
+        <ul>
+            <li ui-sref-active="active">
+                <a ui-sref="home">Home</a>
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="about">About</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1><a ui-sref=".">{{page.heading}}</a></h1>
+</header>
+
+<!-- Angular UI Router Directive for template insertion -->
+<div id="content" ui-view></div>
+
+<script src="js/libs/angular-ui-router.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+
+</html>

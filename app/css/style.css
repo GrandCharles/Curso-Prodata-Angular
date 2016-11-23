@@ -1,0 +1,20 @@
+.verde{
+    background-color: #278049;
+}
+.azul{
+    background-color: #805dff;
+}
+.md-input-container{
+    width: 100%;
+}
+
+
+/** grid **/
+.grid {
+    width: 840px;
+    height: 250px;
+    text-align: left
+}
+/** Fim grid **/
+
+
