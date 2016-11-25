@@ -1,0 +1,58 @@
+<div ng-controller="PesquisaCarroController">
+
+    <form name="carroForm" novalidate>
+
+        <div class="panel panel-success">
+
+            <!-- Cabeçalho-->
+            <div class="panel-heading" align="center">
+                <i class="fa fa-edit"></i>
+                Pesquisa de Carros
+            </div>
+
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Nome do Carro:
+                                <span ng-bind="nmCarro"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">
+                            Cor do Carro:
+                            <span ng-bind="nmCor"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">
+                            Data de Lançamento:
+                            <span ng-bind="dtLanc | date:'dd/MM/yyyy'"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <button class="btn btn-primary navbar-btn" ng-click="abrirPagina('cadastroCarro')">
+                            <i class="fa fa-hand-o-left"></i>
+                            Retorna
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>

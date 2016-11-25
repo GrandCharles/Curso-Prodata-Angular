@@ -1,0 +1,122 @@
+    <div ng-controller="CadastroCarroController">
+
+    <form name="carroForm" novalidate>
+
+        <div class="panel panel-success">
+
+            <!-- Cabeçalho-->
+            <div class="panel-heading" align="center">
+                <i class="fa fa-edit"></i>
+                Cadastro de Carro - Grid
+            </div>
+
+            <!-- Corpo-->
+            <div class="panel-body">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':carroForm.nmCarro.$touched && carroForm.nmCarro.$invalid}">
+
+                            <label class="control-label" >Nome do Carro:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idNmCarro"
+                                   name="nmCarro"
+                                   ng-model="entidade.nmCarro"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="30"
+                                   autofocus="true">
+
+                            <div ng-messages="carroForm.nmCarro.$error"
+                                 ng-if="carroForm.nmCarro.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':carroForm.nmCor.$touched && carroForm.nmCor.$invalid}">
+
+                            <label class="control-label">Cor do Carro:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idCor"
+                                   name="nmCor"
+                                   ng-model="entidade.nmCor"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25">
+
+                            <div ng-messages="carroForm.nmCor.$error"
+                                 ng-if="carroForm.nmCor.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error' : carroForm.dtLanc.$touched && carroForm.dtLanc.$invalid}">
+
+                            <label class="control-label">Data de Lançamento:</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="idDtLanc"
+                                   name="dtLanc"
+                                   ng-model="entidade.dtLanc"
+                                   ng-required="true">
+
+                            <div ng-messages="carroForm.dtLanc.$error"
+                                 ng-if="carroForm.dtLanc.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div ui-grid="gridOptions" class="grid"></div>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary navbar-btn" ng-click="salvar()">
+                    <i class="fa fa-floppy-o"></i>
+                    Salvar
+                </button>
+
+                <button class="btn btn-primary navbar-btn" ng-click="limpar()">
+                    <i class="fa fa-eraser"></i>
+                    Limpar
+                </button>
+
+                <button class="btn btn-primary navbar-btn" ng-click="fechar()">
+                    <i class="fa fa-home"></i>
+                    Fechar
+                </button>
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
