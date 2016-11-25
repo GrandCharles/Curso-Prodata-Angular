@@ -37,13 +37,14 @@
     <script src="app/filter/maisculo.filter.js"></script>
     <script src="app/config/pd-rotas.config.js"></script>
     <script src="app/controller/router.controller.js"></script>
+    <script src="app/controller/principal.controller.js"></script>
 
 
 </head>
 
-<body ng-app="pdApp" class="container" ng-controller="RouterController">
+<body ng-app="pdApp" class="container" ng-controller="PrincipalController">
 
-<div class="container">
+<div class="container" ng-controller="RouterController">
 
     <header class="row">
         header
@@ -61,13 +62,15 @@
 
         <nav class="col-md-3 col-md-pull-9">
 
-            <h2>Exercícios</h2>
+            <h2>Menu</h2>
 
-            <button type="button"
-                    class="btn btn-default btn-medio"
-                    ng-click="abrirPagina('cadastroCarro')">
-                Ex: 01
-            </button>
+            <md-button class="md-fab md-primary" aria-label="Carros" ng-click="abrirPagina('cadastroCarro')">
+                <i class="fa fa-car" aria-hidden="true"></i>
+            </md-button>
+
+            <md-button class="md-fab md-primary" aria-label="Bairros" ng-click="abrirPagina('cadastroBairro')">
+                <i class="fa fa-globe" aria-hidden="true"></i>
+            </md-button>
 
         </nav>
     </div>

@@ -15,7 +15,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
                         <div class="form-group"
                              ng-class="{'has-error':carroForm.nmCarro.$touched && carroForm.nmCarro.$invalid}">
@@ -41,7 +41,7 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
                         <div class="form-group"
                              ng-class="{'has-error':carroForm.nmCor.$touched && carroForm.nmCor.$invalid}">
@@ -67,7 +67,7 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
                         <div class="form-group"
                              ng-class="{'has-error' : carroForm.dtLanc.$touched && carroForm.dtLanc.$invalid}">
@@ -108,6 +108,10 @@
                     Limpar
                 </button>
 
+                <button class="btn btn-primary navbar-btn" ng-click="fechar()">
+                    <i class="fa fa-home"></i>
+                    Fechar
+                </button>
             </div>
 
 

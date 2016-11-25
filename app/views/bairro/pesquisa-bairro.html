@@ -1,13 +1,14 @@
-<div ng-controller="PesquisaCarroController">
 
-    <form name="carroForm" novalidate>
+<div ng-controller="PesquisaBairroController">
+
+    <form name="bairroForm" novalidate>
 
         <div class="panel panel-success">
 
             <!-- Cabeçalho-->
             <div class="panel-heading" align="center">
                 <i class="fa fa-edit"></i>
-                Pesquisa de Carros
+                Pesquisa de Bairros
             </div>
 
             <div class="panel-body">
@@ -16,8 +17,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="control-label">
-                                Nome do Carro:
-                                <span ng-bind="nmCarro"></span>
+                                Bairro:
+                                <span ng-bind="nmBairro"></span>
                             </label>
                         </div>
                     </div>
@@ -25,16 +26,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="control-label">
-                            Cor do Carro:
-                            <span ng-bind="nmCor"></span>
+                            Cidade:
+                            <span ng-bind="nmCidade"></span>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label class="control-label">
-                            Data de Lançamento:
-                            <span ng-bind="dtLanc | date:'dd/MM/yyyy'"></span>
+                            Estado:
+                            <span ng-bind="nmEstado"></span>
                         </label>
                     </div>
                 </div>
@@ -42,7 +43,7 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <button class="btn btn-primary navbar-btn" ng-click="abrirPagina('cadastroCarro')">
+                        <button class="btn btn-primary navbar-btn" ng-click="abrirPagina('cadastroBairro')">
                             <i class="fa fa-hand-o-left"></i>
                             Retorna
                         </button>

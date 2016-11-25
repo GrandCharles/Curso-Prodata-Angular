@@ -1,18 +1,14 @@
 /**
- * Created by GrandCharles on 19/11/2016.
+ * Created by GrandCharles on 24/11/2016.
  */
-angular.module('pdApp').controller('CadastroCarroController', CadastroCarroController);
+angular.module('pdApp').controller('CadastroBairroController', CadastroBairroController);
 
-/* CadastroCarroController.$inject = ['$scope', 'AlertService', '$filter']; */
+/* CadastroBairroController.$inject = ['$scope', 'AlertService', '$filter']; */
 
-/* CadastroCarroController.$inject = ['$scope', 'AlertService', '$filter']; */
-
-function CadastroCarroController($scope, $rootScope, $state, alertService, $filter) {
-    $scope.nome = "GrandCharles";
-
+function CadastroBairroController($scope, $rootScope, $state, alertService, $filter) {
     $scope.entidade = {};
     $rootScope.dadosSalvos = {};
-    $scope.listaCarros = $rootScope.listaCarros;
+    $scope.listaBairro = $rootScope.listaDados;
 
     $scope.salvar = salvar;
     $scope.limpar = limpar;
@@ -26,35 +22,31 @@ function CadastroCarroController($scope, $rootScope, $state, alertService, $filt
 
     $scope.gridOptions = {
         columnDefs: [
-            {name:'Nome do carro', field:'nmCarro', width: 400},
-            {name:'Cor do carro', field:'nmCor', width: 150},
-            {name:'Data lançamento', field:'dtLanc', cellTemplate:'app/template/grid/cell-template-date.html', width: 150},
-            {name:'', field:'editar', cellTemplate:'app/template/grid/cell-template-editar.html', width: 35},
-            {name:' ', field:'excluir', cellTemplate:'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: 'Bairro', field: 'nmBairro', width: 400},
+            {name: 'Cidade', field: 'nmCidade', width: 150},
+            {name: 'Estado', field: 'nmEstado', width: 150},
 
-            {name:'  ', field:'consultar',
-                cellTemplate:'app/template/grid/cell-template-consultar.html',
-                width: 35
-            }
-
+            {name: '', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
+            {name: ' ', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: '  ', field: 'consultar', cellTemplate: 'app/template/grid/cell-template-consultar.html', width: 35}
         ],
-        data:'listaCarros',
+        data: 'listaBairro',
         enableColumnMenus: false
     };
 
     function salvar() {
-        if ($scope.carroForm.$invalid) {
-            $scope.carroForm.nmCarro.$setTouched();
-            $scope.carroForm.nmCor.$setTouched();
-            $scope.carroForm.dtLanc.$setTouched();
+        if ($scope.bairroForm.$invalid) {
+            $scope.bairroForm.nmBairro.$setTouched();
+            $scope.bairroForm.nmCidade.$setTouched();
+            $scope.bairroForm.nmEstado.$setTouched();
 
             alertService.error('Formulário apresenta erros de preenchimento!');
 
             return;
         }
-
-        $scope.entidade.nmCor = $filter('maiusculo')($scope.entidade.nmCor);
-        $scope.listaCarros.push($scope.entidade);
+        /**  $scope.entidade.nmCidade = $filter('maiusculo')($scope.entidade.nmCidade); **/
+        $scope.listaBairro.push($scope.entidade);
+        $rootScope.listaDados = $scope.listaBairro
 
         alertService.success('Salvo com Sucesso!');
 
@@ -63,35 +55,38 @@ function CadastroCarroController($scope, $rootScope, $state, alertService, $filt
 
     function limpar() {
         $scope.entidade = {};
-        $scope.carroForm.$setUntouched();
+        $scope.bairroForm.$setUntouched();
 
-        angular.element('#nmCarro').focus();
+        angular.element('#nmBairro').focus();
     }
 
 
-    function fechar(){
-
+    function fechar() {
+        $rootScope.listaDados = [];
+        abrirPag('blank');
     }
 
 
     function editar(linha) {
-        $scope.entidade.nmCarro = linha.nmCarro;
-        $scope.entidade.nmCor = linha.nmCor;
-        $scope.entidade.dtLanc = linha.dtLanc;
+        $scope.entidade.nmBairro = linha.nmBairro;
+        $scope.entidade.nmCidade = linha.nmCidade;
+        $scope.entidade.nmEstado = linha.nmEstado;
     }
-    function excluir(linha) {
-        var index = $scope.listaCarros.indexOf(linha);
 
-        $rootScope.listaCarros.splice(index, 1)
+    function excluir(linha) {
+        var index = $scope.listaDados.indexOf(linha);
+
+        $scope.listaBairro.splice(index, 1)
+        $rootScope.listaDados = $scope.listaBairro
     }
 
 
     function consultar(linha) {
-        $rootScope.dadosSalvos.nmCarro = linha.nmCarro;
-        $rootScope.dadosSalvos.nmCor = linha.nmCor;
-        $rootScope.dadosSalvos.dtLanc = linha.dtLanc;
+        $rootScope.dadosSalvos.nmBairro = linha.nmBairro;
+        $rootScope.dadosSalvos.nmCidade = linha.nmCidade;
+        $rootScope.dadosSalvos.nmEstado = linha.nmEstado;
 
-        abrirPag('pesquisaCarro');
+        abrirPag('pesquisaBairro');
     }
     function abrirPag(nomeState) {
         $state.go(nomeState);

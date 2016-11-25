@@ -1,11 +1,11 @@
 /**
- * Created by GrandCharles on 19/11/2016.
+ * Created by GrandCharles on 24/11/2016.
  */
-angular.module('pdApp').controller('PesquisaCarroController', PesquisaCarroController);
+angular.module('pdApp').controller('PesquisaBairroController', PesquisaBairroController);
 
-function PesquisaCarroController($scope, $rootScope) {
-    $scope.nmCarro = $rootScope.dadosSalvos.nmCarro;
-    $scope.nmCor = $rootScope.dadosSalvos.nmCor;
-    $scope.dtLanc = $rootScope.dadosSalvos.dtLanc;
+function PesquisaBairroController($scope, $rootScope) {
+    $scope.nmBairro = $rootScope.dadosSalvos.nmBairro;
+    $scope.nmCidade = $rootScope.dadosSalvos.nmCidade;
+    $scope.nmEstado = $rootScope.dadosSalvos.nmEstado;
 
 }

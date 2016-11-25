@@ -3,15 +3,9 @@
  */
 angular.module('pdApp').controller('PesquisaCarroController', PesquisaCarroController);
 
-function PesquisaCarroController($scope, transportaObj) {
-    var dados = [];
-
-    $scope.entidade = {};
-
-    dados = transportaObj.getItem();
-
-    $scope.entidade = dados;
-
-    $scope.texto = dados.nmCarro;
+function PesquisaCarroController($scope, $rootScope) {
+    $scope.nmCarro = $rootScope.dadosSalvos.nmCarro;
+    $scope.nmCor = $rootScope.dadosSalvos.nmCor;
+    $scope.dtLanc = $rootScope.dadosSalvos.dtLanc;
 
 }
