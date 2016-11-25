@@ -8,10 +8,15 @@ angular.module('pdApp').controller('CadastroBairroController', CadastroBairroCon
 function CadastroBairroController($scope, $rootScope, $state, alertService, $filter) {
     $scope.entidade = {};
     $rootScope.dadosSalvos = {};
+
     $scope.listaBairro = $rootScope.listaDados;
 
+    var indice = 0;
+
+    $scope.incluir = true;
+
     $scope.salvar = salvar;
-    $scope.limpar = limpar;
+    $scope.novo = novo;
     $scope.fechar = fechar;
 
     $scope.editar = editar;
@@ -44,47 +49,57 @@ function CadastroBairroController($scope, $rootScope, $state, alertService, $fil
 
             return;
         }
-        /**  $scope.entidade.nmCidade = $filter('maiusculo')($scope.entidade.nmCidade); **/
-        $scope.listaBairro.push($scope.entidade);
-        $rootScope.listaDados = $scope.listaBairro
 
-        alertService.success('Salvo com Sucesso!');
+        if ($scope.incluir) {
+            /**  $scope.entidade.nmCidade = $filter('maiusculo')($scope.entidade.nmCidade); **/
 
-        limpar();
+            $scope.listaBairro.push($scope.entidade);
+
+            alertService.success('Incluído com sucesso!');
+        } else {
+
+            $scope.listaBairro[indice] = $scope.entidade;
+
+            alertService.success('Alterado com sucesso!');
+        }
+
+        novo();
     }
 
-    function limpar() {
-        $scope.entidade = {};
+    function novo() {
         $scope.bairroForm.$setUntouched();
+        $scope.entidade = {};
+        $scope.incluir = true;
 
         angular.element('#nmBairro').focus();
     }
-
-
     function fechar() {
+        $scope.bairroForm.$setUntouched();
         $rootScope.listaDados = [];
         abrirPag('blank');
     }
 
 
     function editar(linha) {
-        $scope.entidade.nmBairro = linha.nmBairro;
-        $scope.entidade.nmCidade = linha.nmCidade;
-        $scope.entidade.nmEstado = linha.nmEstado;
+        indice = $scope.listaDados.indexOf(linha);
+
+        $scope.entidade = linha;
+
+        $scope.incluir = false;
+
+        angular.element('#nmBairro').focus();
     }
 
     function excluir(linha) {
         var index = $scope.listaDados.indexOf(linha);
 
         $scope.listaBairro.splice(index, 1)
-        $rootScope.listaDados = $scope.listaBairro
+
     }
 
 
     function consultar(linha) {
-        $rootScope.dadosSalvos.nmBairro = linha.nmBairro;
-        $rootScope.dadosSalvos.nmCidade = linha.nmCidade;
-        $rootScope.dadosSalvos.nmEstado = linha.nmEstado;
+        $rootScope.dadosSalvos = linha;
 
         abrirPag('pesquisaBairro');
     }
