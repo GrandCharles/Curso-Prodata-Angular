@@ -12,7 +12,6 @@ function CadastroBairroController($scope, $rootScope, $state, alertService, $fil
     $scope.listaBairro = $rootScope.listaDados;
 
     var indice = 0;
-
     $scope.incluir = true;
 
     $scope.salvar = salvar;
@@ -52,13 +51,10 @@ function CadastroBairroController($scope, $rootScope, $state, alertService, $fil
 
         if ($scope.incluir) {
             /**  $scope.entidade.nmCidade = $filter('maiusculo')($scope.entidade.nmCidade); **/
-
             $scope.listaBairro.push($scope.entidade);
 
             alertService.success('Incluído com sucesso!');
         } else {
-
-            $scope.listaBairro[indice] = $scope.entidade;
 
             alertService.success('Alterado com sucesso!');
         }
@@ -67,8 +63,8 @@ function CadastroBairroController($scope, $rootScope, $state, alertService, $fil
     }
 
     function novo() {
-        $scope.bairroForm.$setUntouched();
         $scope.entidade = {};
+        $scope.bairroForm.$setUntouched();
         $scope.incluir = true;
 
         angular.element('#nmBairro').focus();

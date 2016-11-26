@@ -13,8 +13,11 @@ function CadastroCarroController($scope, $rootScope, $state, alertService, $filt
 
     $scope.listaCarro = $rootScope.listaDados;
 
+    var indice = 0;
+    $scope.incluir = true;
+
     $scope.salvar = salvar;
-    $scope.limpar = limpar;
+    $scope.novo = novo;
     $scope.fechar = fechar;
 
     $scope.editar = editar;
@@ -25,19 +28,25 @@ function CadastroCarroController($scope, $rootScope, $state, alertService, $filt
 
     $scope.gridOptions = {
         columnDefs: [
-            {name:'Nome do carro', field:'nmCarro', width: 400},
-            {name:'Cor do carro', field:'nmCor', width: 150},
-            {name:'Data lançamento', field:'dtLanc', cellTemplate:'app/template/grid/cell-template-date.html', width: 150},
-            {name:'', field:'editar', cellTemplate:'app/template/grid/cell-template-editar.html', width: 35},
-            {name:' ', field:'excluir', cellTemplate:'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: 'Nome do carro', field: 'nmCarro', width: 400},
+            {name: 'Cor do carro', field: 'nmCor', width: 150},
+            {
+                name: 'Data lançamento',
+                field: 'dtLanc',
+                cellTemplate: 'app/template/grid/cell-template-date.html',
+                width: 150
+            },
+            {name: '', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
+            {name: ' ', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
 
-            {name:'  ', field:'consultar',
-                cellTemplate:'app/template/grid/cell-template-consultar.html',
+            {
+                name: '  ', field: 'consultar',
+                cellTemplate: 'app/template/grid/cell-template-consultar.html',
                 width: 35
             }
 
         ],
-        data:'listaCarro',
+        data: 'listaCarro',
         enableColumnMenus: false
     };
 
@@ -52,49 +61,58 @@ function CadastroCarroController($scope, $rootScope, $state, alertService, $filt
             return;
         }
 
-        $scope.entidade.nmCor = $filter('maiusculo')($scope.entidade.nmCor);
-        $scope.listaCarro.push($scope.entidade);
-        $rootScope.listaDados = $scope.listaCarro
+        if ($scope.incluir) {
+            $scope.entidade.nmCor = $filter('maiusculo')($scope.entidade.nmCor);
+            $scope.listaCarro.push($scope.entidade);
 
-        alertService.success('Salvo com Sucesso!');
+            alertService.success('Salvo com Sucesso!');
+        } else {
 
-        limpar();
+            alertService.success('Alterado com sucesso!');
+        }
+
+        novo();
     }
 
-    function limpar() {
+    function novo() {
         $scope.entidade = {};
         $scope.carroForm.$setUntouched();
+        $scope.incluir = true;
 
         angular.element('#nmCarro').focus();
     }
 
 
-    function fechar(){
+    function fechar() {
+        $scope.carroForm.$setUntouched();
         $rootScope.listaDados = [];
         abrirPag('blank');
     }
 
 
     function editar(linha) {
-        $scope.entidade.nmCarro = linha.nmCarro;
-        $scope.entidade.nmCor = linha.nmCor;
-        $scope.entidade.dtLanc = linha.dtLanc;
+        indice = $scope.listaDados.indexOf(linha);
+
+        $scope.entidade = linha;
+
+        $scope.incluir = false;
+
+        angular.element('#nmCarro').focus();
     }
+
     function excluir(linha) {
         var index = $scope.listaCarro.indexOf(linha);
 
         $scope.listaCarro.splice(index, 1)
-        $rootScope.listaDados = $scope.listaCarro
     }
 
 
     function consultar(linha) {
-        $rootScope.dadosSalvos.nmCarro = linha.nmCarro;
-        $rootScope.dadosSalvos.nmCor = linha.nmCor;
-        $rootScope.dadosSalvos.dtLanc = linha.dtLanc;
+        $rootScope.dadosSalvos = linha;
 
         abrirPag('pesquisaCarro');
     }
+
     function abrirPag(nomeState) {
         $state.go(nomeState);
     }
