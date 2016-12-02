@@ -1,30 +1,37 @@
 /**
- * Created by GrandCharles on 26/11/2016.
+ * Created by GrandCharles on 01/12/2016.
  */
-angular.module('pdApp').controller('Storage',Storage);
+(function () {
 
-function Storage(){
-    var vm = this;
-    vm.lista = [{nome:'GrandCharles', sexo:'M'}];
-    vm.listaAux = [];
+    angular.module('pdApp').controller('StorageController', StorageController);
 
-    vm.setarInformacaoStorage = setarInformacaoStorage;
+    function StorageController(localStorageService) {
+        var vm = this;
 
-    iniciar();
+        vm.lista = [
+            {nome: 'GrandCharles', sexo: 'M'}
+        ];
+        vm.listaAux = [];
 
-    function iniciar() {
-        verificaSuporteStorage();
-        vm.listaAux = localStorageService.get('listaTeste');
-    }
+        vm.setarInformacoesNoStorage = setarInformacoesNoStorage;
 
-    function verificaSuporteStorage(){
-        if (!localStorageService.isSupported){
-            alert('Desculpe, seu navegador não suporta nossa aplicação');
+        iniciar();
+
+        function iniciar() {
+            verificarSuporteAoStorage();
+
+            vm.listaAux = localStorageService.get('listaTeste');
+        }
+
+        function verificarSuporteAoStorage() {
+            if (!localStorageService.isSupported) {
+                alert('Desculpe, mas seu navegador não suporta nossa aplicação');
+            }
+        }
+
+        function setarInformacoesNoStorage() {
+            localStorageService.set('listaTeste', vm.lista);
         }
     }
 
-    function setInformacaoStorage(){
-        localStorageService.set('listaTeste', vm.lista);
-
-    }
-}
+})();
