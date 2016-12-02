@@ -20,6 +20,7 @@
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/angular/angular.js"></script>
+
     <script src="node_modules/angular-messages/angular-messages.js"></script>
     <script src="node_modules/angular-animate/angular-animate.js"></script>
 
@@ -30,15 +31,16 @@
 
     <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="node_modules/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="node_modules/br-cidades-estados/dist/cidades-estados.min.js"></script>
+    <script src="node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
 
     <script src="app/config/pd-app.js"></script>
     <script src="app/service/alert-service.js"></script>
-    <script src="app/service/transporte-service.js"></script>
     <script src="app/filter/maisculo.filter.js"></script>
     <script src="app/config/pd-rotas.config.js"></script>
     <script src="app/controller/router.controller.js"></script>
-    <script src="app/controller/principal.controller.js"></script>
 
+    <script src="app/controller/principal.controller.js"></script>
 
 </head>
 
@@ -47,14 +49,15 @@
 <div class="container" ng-controller="RouterController">
 
     <header class="row">
-        header
+        Sistema Angularjs
     </header>
 
     <div class="row">
 
         <div role="main" class="col-md-9 col-md-push-3">
 
-            <div> <!-- corpo-->
+            <!-- corpo-->
+            <div class="panel-body">
                 <ui-view></ui-view>
             </div>
 
@@ -64,20 +67,27 @@
 
             <h2>Menu</h2>
 
-            <md-button class="md-fab md-primary" aria-label="Carros" ng-click="abrirPagina('cadastroCarro')">
+            <md-button class="md-fab md-primary"
+                       aria-label="Carros"
+                       ng-click="abrirPagina('cadastroCarro')"
+                       title="Cadastro de Carros">
                 <i class="fa fa-car" aria-hidden="true"></i>
             </md-button>
 
-            <md-button class="md-fab md-primary" aria-label="Bairros" ng-click="abrirPagina('cadastroBairro')">
+            <md-button class="md-fab md-primary"
+                       aria-label="Bairros"
+                       ng-click="abrirPagina('cadastroBairro')"
+                       title="Cadastro de Bairros" >
                 <i class="fa fa-globe" aria-hidden="true"></i>
             </md-button>
 
         </nav>
     </div>
-
+    <!--
     <footer class="row">
-        rodape
+        GrandCharles 2016
     </footer>
+    -->
 </div>
 
 </body>

@@ -3,103 +3,135 @@
  */
 angular.module('pdApp').controller('CadastroBairroController', CadastroBairroController);
 
-/* CadastroBairroController.$inject = ['$scope', 'AlertService', '$filter']; */
+/**
+CadastroBairroController.$inject = [
+    '$scope',
+    '$rootScope',
+    '$state',
+    'AlertService',
+    '$filter',
+    'brCidadesEstados'];
+**/
 
-function CadastroBairroController($scope, $rootScope, $state, alertService, $filter) {
-    $scope.entidade = {};
+function CadastroBairroController($scope,
+                                  $rootScope,
+                                  $state,
+                                  AlertService,
+                                  $filter,
+                                  brCidadesEstados) {
+    var vm = this;
+    var indice = 0;
+    var incluir = true;
+
+    vm.entidade = {};
+
     $rootScope.dadosSalvos = {};
 
-    $scope.listaBairro = $rootScope.listaDados;
+    vm.listaBairro = $rootScope.listaDados;
 
-    var indice = 0;
-    $scope.incluir = true;
-
-    $scope.salvar = salvar;
-    $scope.novo = novo;
-    $scope.fechar = fechar;
-
-    $scope.editar = editar;
-    $scope.excluir = excluir;
-
-    $scope.consultar = consultar;
-    $scope.abrirPag = abrirPag;
-
-    $scope.gridOptions = {
+    vm.gridOptions = {
         columnDefs: [
             {name: 'Bairro', field: 'nmBairro', width: 400},
             {name: 'Cidade', field: 'nmCidade', width: 150},
             {name: 'Estado', field: 'nmEstado', width: 150},
 
-            {name: '', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
-            {name: ' ', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
-            {name: '  ', field: 'consultar', cellTemplate: 'app/template/grid/cell-template-consultar.html', width: 35}
+            {name: 'E', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
+            {name: 'X', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: 'C', field: 'consultar', cellTemplate: 'app/template/grid/cell-template-consultar.html', width: 35}
         ],
-        data: 'listaBairro',
+        data: 'vm.listaBairro',
         enableColumnMenus: false
     };
 
+    vm.salvar = salvar;
     function salvar() {
         if ($scope.bairroForm.$invalid) {
             $scope.bairroForm.nmBairro.$setTouched();
             $scope.bairroForm.nmCidade.$setTouched();
             $scope.bairroForm.nmEstado.$setTouched();
 
-            alertService.error('Formulário apresenta erros de preenchimento!');
+            AlertService.error('Formulário apresenta erros de preenchimento!');
 
             return;
         }
 
-        if ($scope.incluir) {
-            /**  $scope.entidade.nmCidade = $filter('maiusculo')($scope.entidade.nmCidade); **/
-            $scope.listaBairro.push($scope.entidade);
+        if (incluir) {
+            /**  vm.entidade.nmCidade = $filter('maiusculo')(vm.entidade.nmCidade); **/
+            vm.listaBairro.push(vm.entidade);
 
-            alertService.success('Incluído com sucesso!');
+            AlertService.success('Incluído com sucesso!');
         } else {
 
-            alertService.success('Alterado com sucesso!');
+            AlertService.success('Alterado com sucesso!');
         }
 
         novo();
     }
 
+    vm.novo = novo;
     function novo() {
-        $scope.entidade = {};
         $scope.bairroForm.$setUntouched();
-        $scope.incluir = true;
 
-        angular.element('#nmBairro').focus();
+        vm.entidade = {};
+        incluir = true;
+
+        angular.element('#idNmBairro').focus();
     }
+
+    vm.fechar = fechar;
     function fechar() {
         $scope.bairroForm.$setUntouched();
-        $rootScope.listaDados = [];
+        $rootScope.dadosSalvos = [];
         abrirPag('blank');
     }
 
 
+    vm.editar = editar;
     function editar(linha) {
-        indice = $scope.listaDados.indexOf(linha);
+        indice = vm.listaBairro.indexOf(linha);
 
-        $scope.entidade = linha;
+        vm.entidade = linha;
 
-        $scope.incluir = false;
+        incluir = false;
 
-        angular.element('#nmBairro').focus();
+        angular.element('#idNmBairro').focus();
     }
 
+    vm.excluir = excluir;
     function excluir(linha) {
-        var index = $scope.listaDados.indexOf(linha);
+        var index = vm.listaBairro.indexOf(linha);
 
-        $scope.listaBairro.splice(index, 1)
-
+        vm.listaBairro.splice(index, 1)
     }
 
 
+    vm.consultar = consultar;
     function consultar(linha) {
         $rootScope.dadosSalvos = linha;
 
         abrirPag('pesquisaBairro');
     }
+
+
+    vm.abrirPag = abrirPag;
     function abrirPag(nomeState) {
         $state.go(nomeState);
     }
+
+
+    $scope.lstEstados = brCidadesEstados.estados;
+
+    $scope.getCidadesPorSigla = getCidadesPorSigla;
+    function getCidadesPorSigla(sigla){
+        $scope.lstCidades = brCidadesEstados.buscarCidadesPorSigla(sigla);
+        vm.entidade.nmEstado = brCidadesEstados.buscarNomeEstadoPorSigla(sigla);
+    }
+
+    $scope.getNome = getNome;
+    function getNome(nome){
+        vm.entidade.nmCidade = nome;
+
+    }
+
+
 }

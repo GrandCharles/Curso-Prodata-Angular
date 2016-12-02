@@ -1,4 +1,4 @@
-    <div ng-controller="CadastroBairroController">
+<div ng-controller="CadastroBairroController as vm">
 
     <form name="bairroForm" novalidate>
 
@@ -20,12 +20,13 @@
                         <div class="form-group"
                              ng-class="{'has-error':bairroForm.nmBairro.$touched && bairroForm.nmBairro.$invalid}">
 
-                            <label class="control-label" >Bairro:</label>
+                            <label class="control-label">Bairro:</label>
                             <input type="text"
                                    class="form-control"
                                    id="idNmBairro"
                                    name="nmBairro"
-                                   ng-model="entidade.nmBairro"
+                                   ng-model="vm.entidade.nmBairro"
+                                   placeholder="Nome do bairro"
                                    ng-required="true"
                                    ng-minlength="3"
                                    ng-maxlength="30"
@@ -44,17 +45,58 @@
                     <div class="col-md-4">
 
                         <div class="form-group"
+                             ng-class="{'has-error' : bairroForm.nmEstado.$touched && bairroForm.nmEstado.$invalid}">
+
+                            <label class="control-label">Estado:</label>
+                            <!--
+                            <input type="text"
+                                   class="form-control"
+                                   id="idEstado"
+                                   name="nmEstado"
+                                   ng-model="vm.entidade.nmEstado"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25">
+                            -->
+                            <div ng-messages="bairroForm.nmEstado.$error"
+                                 ng-if="bairroForm.nmEstado.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+
+                            <select ng-model="estado.sigla"
+                                    ng-options="estado.sigla as estado.nome for estado in lstEstados"
+                                    ng-change="getCidadesPorSigla(estado.sigla)"
+                                    class="form-control">
+                                <option value="">Escolha um Estado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
                              ng-class="{'has-error':bairroForm.nmCidade.$touched && bairroForm.nmCidade.$invalid}">
 
                             <label class="control-label">Cidade:</label>
+                            <!--
                             <input type="text"
                                    class="form-control"
                                    id="idCidade"
                                    name="nmCidade"
-                                   ng-model="entidade.nmCidade"
-                                   ng-required="true"
+                                   ng-model="vm.entidade.nmCidade"
+                                   ng-required
                                    ng-minlength="3"
                                    ng-maxlength="25">
+                             -->
+                            <select ng-model="cidade_escolhida"
+                                    ng-options="cidade for cidade in lstCidades"
+                                    ng-change="getNome(cidade_escolhida)"
+                                    required
+                                    class="form-control">
+                                <option value="">Escolha uma Cidade</option>
+                            </select>
 
                             <div ng-messages="bairroForm.nmCidade.$error"
                                  ng-if="bairroForm.nmCidade.$touched"
@@ -64,58 +106,35 @@
                             </div>
 
                         </div>
-                    </div>
 
-
-                    <div class="col-md-4">
-
-                        <div class="form-group"
-                             ng-class="{'has-error' : bairroForm.nmEstado.$touched && bairroForm.nmEstado.$invalid}">
-
-                            <label class="control-label">Estado:</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="idEstado"
-                                   name="nmEstado"
-                                   ng-model="entidade.nmEstado"
-                                   ng-required="true"
-                                   ng-minlength="3"
-                                   ng-maxlength="25">
-
-                            <div ng-messages="bairroForm.nmEstado.$error"
-                                 ng-if="bairroForm.nmEstado.$touched"
-                                 class="text-danger">
-
-                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <div ui-grid="gridOptions" class="grid"></div>
                     </div>
 
                 </div>
 
-                <button class="btn btn-primary navbar-btn" ng-click="novo()">
-                    <i class="fa fa-eraser"></i>
-                    Novo
-                </button>
-                <button class="btn btn-primary navbar-btn" ng-click="salvar()">
-                    <i class="fa fa-floppy-o"></i>
-                    Salvar
-                </button>
-                <button class="btn btn-primary navbar-btn" ng-click="fechar()">
-                    <i class="fa fa-home"></i>
-                    Fechar
-                </button>
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div ui-grid="vm.gridOptions" class="grid"></div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary navbar-btn" ng-click="vm.novo()">
+                <i class="fa fa-eraser"></i>
+                Novo
+            </button>
+            <button class="btn btn-primary navbar-btn" ng-click="vm.salvar()">
+                <i class="fa fa-floppy-o"></i>
+                Salvar
+            </button>
+            <button class="btn btn-primary navbar-btn" ng-click="vm.fechar()">
+                <i class="fa fa-home"></i>
+                Fechar
+            </button>
         </div>
 
-    </form>
+</div>
+
+</form>
 
 </div>

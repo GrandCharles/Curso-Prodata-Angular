@@ -2,6 +2,8 @@
  * Created by GrandCharles on 14/11/2016.
  */
 angular.module('pdApp').controller('CadastroCarroController', CadastroCarroController);
+/* CadastroCarroController.$inject = ['$scope', 'AlertService', '$filter']; */
+
 
 function CadastroCarroController($scope, alertService, $filter) {
     $scope.nome = "GrandCharles";

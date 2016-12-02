@@ -1,9 +1,9 @@
 /**
  * Created by GrandCharles on 16/11/2016.
  */
-angular.module('pdApp').service('alertService', alertService);
+angular.module('pdApp').service('AlertService', AlertService);
 
-function alertService(toastr) {
+function AlertService(toastr) {
     this.success = success;
     this.error = error;
     this.info = info;

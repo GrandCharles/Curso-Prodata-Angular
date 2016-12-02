@@ -10,6 +10,6 @@ function HelloController($scope) {
     function onTesteEnvioEvento(event, data) {
         var teste = data;
 
-        console.log('Nome: ', event.currentScope.teste)
+        console.log('Nome: ', event.currentScope.nome)
     }
 }

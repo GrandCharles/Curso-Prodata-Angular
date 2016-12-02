@@ -1,109 +1,123 @@
 /**
  * Created by GrandCharles on 19/11/2016.
  */
+/**
+ */
 angular.module('pdApp').controller('CadastroCarroController', CadastroCarroController);
 
-/* CadastroCarroController.$inject = ['$scope', 'AlertService', '$filter']; */
+CadastroCarroController.$inject = ['$scope', '$rootScope','$state', 'AlertService', '$filter'];
 
-function CadastroCarroController($scope, $rootScope, $state, alertService, $filter) {
-    $scope.nome = "GrandCharles";
+function CadastroCarroController($scope, $rootScope, $state, AlertService, $filter) {
+    var vm = this;
+    var indice = 0;
+    var incluir = true;
 
-    $scope.entidade = {};
+    vm.nome = "GrandCharles";
+
+    vm.entidade = {};
+    vm.listaCarro = $rootScope.listaDados;
+
     $rootScope.dadosSalvos = {};
 
-    $scope.listaCarro = $rootScope.listaDados;
 
-    var indice = 0;
-    $scope.incluir = true;
+    vm.tpCambio = [
+        {valor:'A', descricao:'Automático'},
+        {valor:'M', descricao:'Manual'}
+    ];
 
-    $scope.salvar = salvar;
-    $scope.novo = novo;
-    $scope.fechar = fechar;
+    vm.tpPessoa = [
+        {tipo:'F', nome:'Física'},
+        {tipo:'J', nome:'Jurídica'}
+    ];
 
-    $scope.editar = editar;
-    $scope.excluir = excluir;
+    vm.novo = novo;
+    vm.salvar = salvar;
+    vm.fechar = fechar;
 
-    $scope.consultar = consultar;
-    $scope.abrirPag = abrirPag;
+    vm.editar = editar;
+    vm.excluir = excluir;
+    vm.deletar = deletar;
+    vm.consultar = consultar;
 
-    $scope.gridOptions = {
+    vm.abrirPag = abrirPag;
+
+    vm.gridOptions = {
         columnDefs: [
-            {name: 'Nome do carro', field: 'nmCarro', width: 400},
-            {name: 'Cor do carro', field: 'nmCor', width: 150},
-            {
-                name: 'Data lançamento',
-                field: 'dtLanc',
-                cellTemplate: 'app/template/grid/cell-template-date.html',
-                width: 150
-            },
-            {name: '', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
-            {name: ' ', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: 'Marca', field: 'nmMarca', width: 150},
+            {name: 'Nome', field: 'nmCarro', width: 300},
+            {name: 'Cor', field: 'nmCor', width: 100},
+            {name: 'Data lançamento', field: 'dtLanc', cellTemplate: 'app/template/grid/cell-template-date.html', width: 150},
 
-            {
-                name: '  ', field: 'consultar',
-                cellTemplate: 'app/template/grid/cell-template-consultar.html',
-                width: 35
-            }
-
+            {name: 'E', field: 'editar', cellTemplate: 'app/template/grid/cell-template-editar.html', width: 35},
+            {name: 'X', field: 'excluir', cellTemplate: 'app/template/grid/cell-template-excluir.html', width: 35},
+            {name: 'C', field: 'consultar', cellTemplate: 'app/template/grid/cell-template-consultar.html', width: 35}
         ],
-        data: 'listaCarro',
+        data: 'vm.listaCarro',
         enableColumnMenus: false
     };
 
     function salvar() {
         if ($scope.carroForm.$invalid) {
+            $scope.carroForm.nmMarca.$setTouched();
             $scope.carroForm.nmCarro.$setTouched();
             $scope.carroForm.nmCor.$setTouched();
             $scope.carroForm.dtLanc.$setTouched();
 
-            alertService.error('Formulário apresenta erros de preenchimento!');
+            AlertService.error('Formulário apresenta erros de preenchimento!');
 
             return;
         }
 
-        if ($scope.incluir) {
-            $scope.entidade.nmCor = $filter('maiusculo')($scope.entidade.nmCor);
-            $scope.listaCarro.push($scope.entidade);
+        if (incluir) {
+            vm.entidade.nmMarca = $filter('maiusculo')(vm.entidade.nmMarca);
+            vm.entidade.nmCarro = $filter('maiusculo')(vm.entidade.nmCarro);
+            vm.entidade.nmCor = $filter('maiusculo')(vm.entidade.nmCor);
 
-            alertService.success('Salvo com Sucesso!');
+            vm.listaCarro.push(vm.entidade);
+
+            AlertService.success('Salvo com Sucesso!');
         } else {
 
-            alertService.success('Alterado com sucesso!');
+            AlertService.success('Alterado com sucesso!');
         }
 
         novo();
     }
 
     function novo() {
-        $scope.entidade = {};
         $scope.carroForm.$setUntouched();
-        $scope.incluir = true;
 
-        angular.element('#nmCarro').focus();
+        vm.entidade = {};
+        incluir = true;
+
+        angular.element('#idNmMarca').focus();
     }
-
 
     function fechar() {
         $scope.carroForm.$setUntouched();
-        $rootScope.listaDados = [];
+        $rootScope.dadosSalvos = [];
+
         abrirPag('blank');
     }
 
-
     function editar(linha) {
-        indice = $scope.listaDados.indexOf(linha);
+        indice = vm.listaCarro.indexOf(linha);
 
-        $scope.entidade = linha;
+        vm.entidade = linha;
 
-        $scope.incluir = false;
+        incluir = false;
 
-        angular.element('#nmCarro').focus();
+        angular.element('#idNmMarca').focus();
     }
 
     function excluir(linha) {
-        var index = $scope.listaCarro.indexOf(linha);
+        var index = vm.listaCarro.indexOf(linha);
 
-        $scope.listaCarro.splice(index, 1)
+        vm.listaCarro.splice(index, 1)
+    }
+
+    function deletar() {
+        AlertService.success('Deletado com sucesso!');
     }
 
 
