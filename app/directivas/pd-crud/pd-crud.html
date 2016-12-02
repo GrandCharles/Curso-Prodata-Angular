@@ -1,0 +1,123 @@
+<div class="pdCrud">
+
+    <form name="bairroForm" novalidate>
+
+        <div class="panel panel-success">
+
+            <!-- Cabeçalho-->
+            <div class="panel-heading" align="center">
+                <i class="fa fa-edit"></i>
+                Cadastro de Bairros
+            </div>
+
+            <!-- Corpo-->
+            <div class="panel-body">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':bairroForm.nmBairro.$touched && bairroForm.nmBairro.$invalid}">
+
+                            <label class="control-label" >Bairro:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idNmBairro"
+                                   name="nmBairro"
+                                   ng-model="entidade.nmBairro"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="30"
+                                   autofocus="true">
+
+                            <div ng-messages="bairroForm.nmBairro.$error"
+                                 ng-if="bairroForm.nmBairro.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error':bairroForm.nmCidade.$touched && bairroForm.nmCidade.$invalid}">
+
+                            <label class="control-label">Cidade:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idCidade"
+                                   name="nmCidade"
+                                   ng-model="entidade.nmCidade"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25">
+
+                            <div ng-messages="bairroForm.nmCidade.$error"
+                                 ng-if="bairroForm.nmCidade.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="form-group"
+                             ng-class="{'has-error' : bairroForm.nmEstado.$touched && bairroForm.nmEstado.$invalid}">
+
+                            <label class="control-label">Estado:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="idEstado"
+                                   name="nmEstado"
+                                   ng-model="entidade.nmEstado"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25">
+
+                            <div ng-messages="bairroForm.nmEstado.$error"
+                                 ng-if="bairroForm.nmEstado.$touched"
+                                 class="text-danger">
+
+                                <div ng-messages-include="app/template/input-ng-messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div ui-grid="gridOptions" class="grid"></div>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary navbar-btn" ng-click="novo()">
+                    <i class="fa fa-eraser"></i>
+                    Novo
+                </button>
+                <button class="btn btn-primary navbar-btn" ng-click="salvar()">
+                    <i class="fa fa-floppy-o"></i>
+                    Salvar
+                </button>
+                <button class="btn btn-primary navbar-btn" ng-click="fechar()">
+                    <i class="fa fa-home"></i>
+                    Fechar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+</div>
