@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Angularjs - Principal</title>
+    <title>Cadastro Produto - Super Crud</title>
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
@@ -39,38 +38,8 @@
     <script src="app/config/pd-rotas.config.js"></script>
     <script src="app/controller/router.controller.js"></script>
 
-    <script src="app/controller/principal.controller.js"></script>
-
-    <style>
-        .corpo {
-            background-color: yellow;
-        }
-    </style>
-
 </head>
-
-<body ng-app="pdApp" class="container" ng-controller="PrincipalController as vm">
-
-<div class="container-fluid" ng-controller="RouterController">
-
-    <div ng-include="'app/template/header.html'"></div>
-
-    <div class="row">
-
-        <div role="corpo" class="col-md-9 col-md-push-3 scroll">
-
-            <ui-view></ui-view>
-
-        </div>
-
-        <div ng-include="'app/template/menu.html'"></div>
-
-    </div>
-
-    <div ng-include="'app/template/footer.html'"></div>
-</div>
+<body>
 
 </body>
-
-
 </html>

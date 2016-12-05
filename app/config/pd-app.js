@@ -14,9 +14,11 @@
             'ui.router',          /** Roteamento baseado em url */
             'oc.lazyLoad',        /** Gerenciamento de carga de formulário */
             'br.cidades.estados', /** Cidade e estados **/
-            'LocalStorageModule'  /** **/
+            'LocalStorageModule',  /** **/
+            'angular-loading-bar'  /** Barra de progressão**/
         ]);
 
 })();
+
 
 

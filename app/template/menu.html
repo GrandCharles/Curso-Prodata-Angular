@@ -1,0 +1,30 @@
+<style>
+    .menu {
+        top: 1px;
+        right: 980px;
+        width: 200px;
+        height: 530px;
+        background-color: darkgray;
+        text-align: center;
+    }
+</style>
+
+<nav class="col-md-3 col-md-pull-9 menu" >
+
+    <h2>Menu</h2>
+
+    <md-button class="md-fab md-primary"
+               aria-label="Carros"
+               ng-click="abrirPagina('cadastroCarro')"
+               title="Cadastro de Carros">
+        <i class="fa fa-car" aria-hidden="true"></i>
+    </md-button>
+
+    <md-button class="md-fab md-primary"
+               aria-label="Bairros"
+               ng-click="abrirPagina('cadastroBairro')"
+               title="Cadastro de Bairros">
+        <i class="fa fa-globe" aria-hidden="true"></i>
+    </md-button>
+
+</nav>

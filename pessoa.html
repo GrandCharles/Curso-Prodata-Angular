@@ -6,7 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Angularjs - Principal</title>
+    <title>Pessoa  Requisições assincronas</title>
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
@@ -23,15 +23,16 @@
 
     <script src="node_modules/angular-messages/angular-messages.js"></script>
     <script src="node_modules/angular-animate/angular-animate.js"></script>
+
     <script src="node_modules/angular-aria/angular-aria.js"></script>
     <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="node_modules/angular-ui-grid/ui-grid.js"></script>
+
     <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="node_modules/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="node_modules/br-cidades-estados/dist/cidades-estados.min.js"></script>
     <script src="node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="node_modules/angular-loading-bar/src/loading-bar.js"></script>
 
     <script src="app/config/pd-app.js"></script>
     <script src="app/service/alert-service.js"></script>
@@ -39,36 +40,9 @@
     <script src="app/config/pd-rotas.config.js"></script>
     <script src="app/controller/router.controller.js"></script>
 
-    <script src="app/controller/principal.controller.js"></script>
-
-    <style>
-        .corpo {
-            background-color: yellow;
-        }
-    </style>
-
 </head>
 
-<body ng-app="pdApp" class="container" ng-controller="PrincipalController as vm">
-
-<div class="container-fluid" ng-controller="RouterController">
-
-    <div ng-include="'app/template/header.html'"></div>
-
-    <div class="row">
-
-        <div role="corpo" class="col-md-9 col-md-push-3 scroll">
-
-            <ui-view></ui-view>
-
-        </div>
-
-        <div ng-include="'app/template/menu.html'"></div>
-
-    </div>
-
-    <div ng-include="'app/template/footer.html'"></div>
-</div>
+<body>
 
 </body>
 

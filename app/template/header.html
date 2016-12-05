@@ -1,20 +1,27 @@
-<nav class="navbar navbar-inverse" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">{{ header }}</a>
-    </div>
+<style>
+    .header{
+        width: auto;
+        height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        background-color: yellow;
+        background-image: url('app/css/layoutFundoTopo.png');
+    }
+    .texto{
+        text-align: center;
+        color: yellow;
+        font-size: 18px;
+    }
+</style>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="active"><a ui-sref="main.home.content">Home</li>
-            <li class="active"><a ui-sref="main.stuff">Stuff</li>
-        </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="header texto">
+            <br>
+            <p>{{vm.titulo}}</p>
+        </div>
+    </div>
+</div>
